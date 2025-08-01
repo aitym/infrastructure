@@ -1,0 +1,29 @@
+- name: Configure web server
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Ensure NGINX is installed
+      ansible.builtin.yum:
+        name: nginx
+        state: present
+
+    - name: Ensure NGINX is running and enabled
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: true
+
+    - name: Set custom NGINX homepage
+      ansible.builtin.copy:
+        dest: /usr/share/nginx/html/index.html
+        content: |
+          <html>
+            <head><title>Welcome</title></head>
+            <body>
+              <h1>Welcome to my Ansible-managed NGINX server!</h1>
+            </body>
+          </html>
+        owner: root
+        group: root
+        mode: '0644'
