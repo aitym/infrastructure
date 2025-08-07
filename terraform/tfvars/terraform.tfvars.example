@@ -1,0 +1,4 @@
+hcloud_token = ""
+location = "hel1"
+ansible_user_name = "ansible"
+servers_count = 2
